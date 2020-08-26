@@ -2,26 +2,26 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
     labels:
-        app: swift-lake-microservice
+        app: prakash-solo-microservice
         stack: frontend
         source: demo
-    name: swift-lake-microservice
+    name: prakash-solo-microservice
     namespace: microservices
 spec:
     replicas: 3
     selector:
         matchLabels:
-            run: swift-lake-microservice
+            run: prakash-solo-microservice
     template:
         metadata:
             labels:
-                app: swift-lake-microservice
-                run: swift-lake-microservice
+                app: prakash-solo-microservice
+                run: prakash-solo-microservice
                 source: demo
         spec:
             containers:
-                -   image: 633102329196.dkr.ecr.us-east-2.amazonaws.com/swift-lake-microservice
-                    name: swift-lake-microservice
+                -   image: 633102329196.dkr.ecr.us-east-2.amazonaws.com/prakash-solo-microservice
+                    name: prakash-solo-microservice
                     ports:
                         -   name: web
                             containerPort: 8080
@@ -31,13 +31,13 @@ kind: Service
 apiVersion: v1
 metadata:
     labels:
-        app: swift-lake-microservice-service
-    name: swift-lake-microservice-service
+        app: prakash-solo-microservice-service
+    name: prakash-solo-microservice-service
     namespace: microservices
 spec:
     selector:
         source: demo
-        app: swift-lake-microservice
+        app: prakash-solo-microservice
     ports:
         -   name: web
             protocol: TCP
@@ -51,15 +51,15 @@ kind: Ingress
 metadata:
     annotations:
         nginx.ingress.kubernetes.io/rewrite-target: /$2
-    name: swift-lake-ingress
+    name: prakash-solo-ingress
     namespace: microservices
 spec:
     rules:
         -   http:
                 paths:
-                    -   path: /swift-lake(/|$)(.*)
+                    -   path: /prakash-solo(/|$)(.*)
                         backend:
-                            serviceName: swift-lake-microservice-service
+                            serviceName: prakash-solo-microservice-service
                             servicePort: 30201
 
 
